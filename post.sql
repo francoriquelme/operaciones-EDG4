@@ -44,8 +44,6 @@ INSERT INTO post (userName, createdAt, content, descripcion, title)
 VALUES('Pedro', '2021-04-11', 'Hola', 'Chao', 'Atencion');
 INSERT INTO post (userName, createdAt, content, descripcion, title)
 VALUES('Pedro', '2021-04-12', 'Hola 1', 'Chao 1', 'Atencion 1');
-INSERT INTO post (userName, createdAt, content, descripcion, title)
-VALUES('Pedro', '2021-04-13', 'Hola 2', 'Chao 2', 'Atencion 2');
 SELECT * FROM post;
 -- 7. Eliminar el post de Carlos. (1 Punto)
 DELETE FROM post WHERE userName = 'Carlos';
@@ -57,6 +55,41 @@ SELECT * FROM post;
 -- //////// Parte 2 /////////
 -- 1. Crear una nueva tabla llamada “comentarios”, con los atributos id, fecha, hora de
 -- creación y contenido, que se relacione con la tabla posts. (1 Punto)
+CREATE TABLE comentarios(
+    id SERIAL,
+    post_id INT, 
+    createdAt TIMESTAMP,
+    content VARCHAR,
+    FOREIGN KEY (post_id) REFERENCES post (id)
+);
+\dt
 -- 2. Crear 2 comentarios para el post de "Pamela" y 4 para "Carlos". (0.4 Puntos)
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(1, '2021-04-10 15:16:13', 'El mio era el velociraptor');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(1, '2021-05-11 10:00:24', 'Bueno ya');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(6, '2021-05-11 09:00:00', 'Ya Carlitos');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(6, '2021-05-12 10:00:00', 'Ya ya');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(6, '2021-05-11 11:00:00', 'Ya ya ya');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(6, '2021-05-14 12:00:00', 'Ya ya ya ya');
+SELECT * FROM comentarios;
 -- 3. Crear un nuevo post para "Margarita". (1 Punto)
+INSERT INTO post (userName, createdAt, content, descripcion, title)
+VALUES('Margarita', '2021-06-11', 'Hola', 'Hola Hola', 'Saluando a margarita');
+SELECT * FROM post;
 -- 4. Ingresar 5 comentarios para el post de Margarita. (1 Punto)
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(7, '2021-05-11 10:00:00', 'Hola');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(7, '2021-05-11 11:00:00', 'Hola Hola');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(7, '2021-05-11 12:00:00', 'Chao');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(7, '2021-05-11 13:00:00', 'Chao Chao');
+INSERT INTO comentarios(post_id, createdAt, content)
+VALUES(7, '2021-05-11 14:00:00', 'Chao Chao Chao');
+SELECT * FROM comentarios;
